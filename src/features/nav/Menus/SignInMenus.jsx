@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
  const SignInMenus = ({signOut}) => {
     return (
-        <div>
+        
         <Menu.Item position="right">
         <Image avatar spaced="right" src='/assets/user.png' />
         <Dropdown pointing="top left" text="Username">
@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>
-        </div>
+        
     )
 }
 export default SignInMenus;
