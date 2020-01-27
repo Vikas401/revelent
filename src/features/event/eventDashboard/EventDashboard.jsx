@@ -16,7 +16,7 @@ import { createEvent, updateEvent, deleteEvent } from '../eventActions';
         <Grid>
         <Grid.Column width={10}>
         <EventList events={events} 
-        selectEvent={this.handleSelectedEvent}
+       
         deleteEvent={this.handleDeleteEvent}
         />
         </Grid.Column>

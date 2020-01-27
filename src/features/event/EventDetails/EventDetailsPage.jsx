@@ -10,6 +10,7 @@ import EventDetailSidebar from './EventDetailSidebar';
 
 
  const EventDetailsPage = ({event}) => {
+   console.log(event)
     return (
         <Grid>
         <Grid.Column width={10}>
