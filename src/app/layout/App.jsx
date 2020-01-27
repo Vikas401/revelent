@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import EventDashboard from '../../features/event/eventDashboard/EventDashboard'
 import NavBar from '../../features/nav/NavBar/NavBar'
 import { Container } from 'semantic-ui-react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Homepage from '../../features/home/Homepage';
 import EventDetailsPage from '../../features/event/EventDetails/EventDetailsPage';
 import PeopleDashboard from '../../features/user/PeopleDashboard/PeopleDashboard';
@@ -22,14 +22,15 @@ import TestComponent from '../../features/testComponent/TestComponent';
        <Fragment>
         <NavBar/>
         <Container className='main'>
-        <Route path='/events' component={EventDashboard}/>
+        <Switch key={this.props.location.key}>
+        <Route exact path='/events' component={EventDashboard}/>
         <Route path='/events/:id' component={EventDetailsPage}/>
         <Route path='/people' component={PeopleDashboard}/>
         <Route path='/Profile/:id' component={UserDetailPage}/>
         <Route path='/settings' component={SettingDashboard}/>
-        <Route path='/createEvent' component={EventForm}/>
+        <Route path={['/createEvent','/manage/:id' ]} component={EventForm}/>
         <Route path='/test' component={TestComponent}/>
-
+        </Switch>
         </Container>
         </Fragment>
         
@@ -38,4 +39,4 @@ import TestComponent from '../../features/testComponent/TestComponent';
     )
   }
 }
-export default App;
+export default withRouter(App);

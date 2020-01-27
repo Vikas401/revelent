@@ -5,4 +5,4 @@ import rootReducer from '../reducers/rootReduser';
 export const configStore = () => {
     const store = createStore(rootReducer, devToolsEnhancer());
     return store;
-}
+} 
