@@ -5,11 +5,11 @@ import App from './app/layout/App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configStore } from './app/store/configStore';
-//import ScrollToTop from './app/common/utills/ScrollToTop';
+import { loadEvent } from './features/event/eventActions';
 
 
 const store = configStore();
-//console.log(store.getState());
+store.dispatch(loadEvent())
 
 ReactDOM.render(
     <Provider store={store}>

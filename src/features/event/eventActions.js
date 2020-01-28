@@ -1,4 +1,6 @@
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from "./eventconstant";
+import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENT } from "./eventconstant";
+import { asyncActionStart, asyncActionFinish, asyncActionError } from "../async/asyncActions";
+import { fetchSampleData } from "../../app/data/mokeApi";
 
 export const createEvent = (event) => {
    return{
@@ -30,4 +32,18 @@ export const deleteEvent = (eventId) => {
     }
    };
 
+   export const loadEvent = () => {
+       return async dispatch => {
+           try{
+               dispatch(asyncActionStart())
+               const events = await fetchSampleData()
+
+               dispatch({ type: FETCH_EVENT, payload: {events}})
+               dispatch(asyncActionFinish())
+           }catch(error) {
+             console.log(error);
+             dispatch(asyncActionError)
+           }
+       }
+   }
 
