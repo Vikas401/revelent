@@ -1,20 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Menu, Container, Button } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignOutMenus from '../Menus/SignOutMenus';
 import SignInMenus from '../Menus/SignInMenus';
+import { openModal } from '../../modals/modalActions';
+import { logout } from '../../auth/authActions';
+
+const actions = {
+  openModal,
+  logout
+};
+
+const mapStateToProps = (state) =>({
+  auth: state.auth
+});
  class NavBar extends Component {
-   state = {
-     authenticated: true
+   
+   handleSignIn = () => {
+     this.props.openModal('LoginModal')
+    }
+
+   handleRegister = () => {
+     this.props.openModal('RegisterModal')
    }
 
-   handleSignIn = () => this.setState({ authenticated: true });
    handleSignOut = () => {
-     this.setState({ authenticated: false });
+     this.props.logout()
     this.props.history.push('/');
-    };
+    }
+
     render() {
-      const { authenticated } = this.state;
+      const { auth } = this.props;
+      const authenticated = auth.authenticated;
         return (
             <Menu inverted fixed="top">
             <Container>
@@ -30,9 +48,9 @@ import SignInMenus from '../Menus/SignInMenus';
                 <Button as={Link} to='/createEvent' floated="right" positive inverted content="Create Event" />
               </Menu.Item>
               {authenticated ? (
-                 <SignInMenus signOut={this.handleSignOut} /> 
+                 <SignInMenus signOut={this.handleSignOut} currentUser = {auth.currentUser}/> 
                  ) : (
-                  <SignOutMenus signIn={this.handleSignIn}/>
+                  <SignOutMenus signIn={this.handleSignIn} register = {this.handleRegister}/>
                   )
                 }
             </Container>
@@ -40,4 +58,4 @@ import SignInMenus from '../Menus/SignInMenus';
         )
     }
 }
-export default withRouter(NavBar);
+export default withRouter(connect(mapStateToProps, actions)(NavBar));
