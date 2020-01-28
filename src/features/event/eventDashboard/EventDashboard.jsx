@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import EventList from '../EventList/EventList';
 import { createEvent, updateEvent, deleteEvent } from '../eventActions';
 import LodingComponent from '../../../app/layout/LodingComponent';
+import EventActivity from '../EventActivity/EventActivity';
 
  class EventDashboard extends Component {
      
@@ -23,7 +24,7 @@ import LodingComponent from '../../../app/layout/LodingComponent';
         />
         </Grid.Column>
         <Grid.Column width={6}>
-           <h2>Activity Feed</h2>
+           <EventActivity/>
         </Grid.Column>
          </Grid>
     )
