@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+
+
 const eventImageStyle = {
     filter: 'brightness(30%)'
 };
@@ -14,22 +16,26 @@ const eventImageTextStyle = {
     height: 'auto',
     color: 'white'
 };
- const EventDetailHeader = ({ event }) => {
+ const EventDetailHeader = ({event}) => {
+   
     return (
         <Fragment>
         <Segment.Group>
       <Segment basic attached="top" style={{ padding: '0' }}>
-        <Image src={`/assets/categoryImages/${event.category}.jpg`} fluid style={eventImageStyle} />
+        <Image src={`/assets/categoryImages/${event.category}.jpg`} fluid style = {eventImageStyle}/>
 
-        <Segment basic style={eventImageTextStyle}>
+        <Segment basic style = {eventImageTextStyle}>
           <Item.Group>
             <Item>
               <Item.Content>
+              
                 <Header
                   size="huge"
-                  content={event.title}
+                  content= {event.title}
                   style={{ color: 'white' }}
                 />
+              
+                
                 <p>{event.date}</p>
                 <p>
                   Hosted by <strong>{event.hostedBy}</strong>

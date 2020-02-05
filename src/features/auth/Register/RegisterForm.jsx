@@ -1,38 +1,80 @@
 import React from 'react';
-import { Form, Segment, Button } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import TextInput from '../../../app/common/form/TextInput';
-
-const RegisterForm = () => {
-  return (
-    <div>
-      <Form size="large">
+import { Form, Segment, Button, Divider } from 'semantic-ui-react';
+//import { reduxForm } from 'redux-form';
+//import TextInput from '../../../app/common/form/TextInput';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { connect } from 'react-redux';
+import { userPostInsert } from '../authActions';
+import { closeModal } from '../../modals/modalActions';
+ 
+class RegisterForm extends React.Component {
+    
+  state = {
+     
+      email: '',
+      password: '',
+      
+    }
+     
+    onFormSubmit = (evt) => {
+      evt.preventDefault();
+    
+      this.props.userPostInsert(this.state);
+      this.props.closeModal();
+      
+    }
+    handleChange =(e) =>{
+      this.setState({
+       [e.target.name]: e.target.value
+      });
+    };
+  
+  
+ 
+    render(){
+         // console.log(this.props.users);
+      return (
         <Segment>
-          <Field
-            name="displayName"
-            type="text"
-            component={TextInput}
-            placeholder="Known As"
-          />
-          <Field
-            name="email"
-            type="text"
-            component={TextInput}
-            placeholder="Email"
-          />
-          <Field
-            name="password"
-            type="password"
-            component={TextInput}
-            placeholder="Password"
-          />
-          <Button fluid size="large" color="teal">
-            Register
-          </Button>
-        </Segment>
-      </Form>
-    </div>
-  );
-};
+              <Form size="large" onSubmit= {this.onFormSubmit}>
+            
+              <Form.Field>
+                <input
+                  name="email"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                  placeholder="Email"/>
+                  </Form.Field>
+                  <Form.Field>
+                  <input
+                    name="password"
+                    type="password"
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                    placeholder="Password"/>
+                    </Form.Field>
+                  
+              <Button fluid size="large" color="teal">
+                Register
+              </Button>
+              <Divider horizontal>
+              Or
+            </Divider>
+            <SocialLogin/>
+          </Form>
+          </Segment>
+   );
+  };
+  }
+  const mapStateToProps = (state) => ({
+    users: state.auth
+  })
+  const actions = {
+    userPostInsert,
+    closeModal
+  }
 
-export default reduxForm({ form: 'registerForm'})(RegisterForm);
+
+//(reduxForm({ form: 'registerForm'})
+
+export default connect(mapStateToProps, actions)(RegisterForm);

@@ -2,11 +2,21 @@ import React, { Component } from 'react'
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import EventAttendee from './EventListAttendee';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+//import { deleteEvent } from '../eventActions';
+
+
 
  class EventListItem extends Component {
+
+  // componentDidMount(){
+  //   this.props.loadEvent(this.props.match.params.id)
+  // }
+ 
+ 
   render() {
     const { event, deleteEvent } = this.props;
-
+    
     return (  
       <Segment.Group>
       <Segment>
@@ -36,11 +46,17 @@ import { Link } from 'react-router-dom';
         </List>
       </Segment>
       <Segment clearing>{event.description}
-      <Button onClick={() => deleteEvent(event.id)} as="a" color="red" floated="right" content="Delete" />
+      <Button onClick={() => deleteEvent()} as="a" color="red" floated="right" content="Delete" />
         <Button  as={Link}  to={`/events/${event.id}`} color="teal" floated="right" content="View" />
       </Segment>
     </Segment.Group>
     )
   }
 }
-export default EventListItem;
+// const actions= {
+//   deleteEvent
+// }
+// const mapStateToProps = (state) => {
+//  return { events: state.event };
+// }
+export default connect()(EventListItem);

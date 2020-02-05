@@ -12,11 +12,12 @@ import DateInput from '../../../app/common/form/DateInput';
 
 const mapStateToProps = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
-
+ 
   let event ={};
 
-   if (eventId && state.events.length > 0){
-     event = state.events.filter(event => event.id === eventId)[0]
+   let events = Object.values(state.event);
+   if (eventId && events.length > 0){
+     event = events.filter(event => event.id === eventId)[0];
    }
    return{
     initialValues: event
@@ -49,23 +50,23 @@ const category = [
   {key: 'travel', text: 'Travel', value: 'travel'},
 ];
  class EventForm extends Component {
-   
-   onFormSubmit = values => {
      
-      if (this.props.initialValues.id){
-        this.props.updateEvent(values);
-        this.props.history.push(`/events/${this.props.initialValues.id}`)
-      }else{
+   onFormSubmit = (event) => {
+         //console.log(event)
+       if (this.props.initialValues.id){
+         this.props.updateEvent(this.props.initialValues.id, event);
+         this.props.history.push(`/events/${this.props.initialValues.id}`)
+       }else{
         const newEvent = {
-         ...values,
+         ...event,
          id: cuid(),
-         hostPhotoURL: '/assets/vikas.jpg',
-         hostedBy:'bob'
-       }
+          hostPhotoURL: '/assets/vikas.jpg',
+        }
       this.props.createEvent(newEvent);
       this.props.history.push(`/events/${newEvent.id}`)
-    }
+    
    }
+  }
 
    
   render() {
@@ -93,6 +94,12 @@ const category = [
          component={TextArea}
          rows={3} 
          placeholder="Tell us about your event"
+         />
+         <Field name="hostedBy" 
+         type="text"
+         component={TextInput}
+         
+         placeholder="Hosted By"
          />
          
          <Header sub color="teal" content="Event Location Details"/>

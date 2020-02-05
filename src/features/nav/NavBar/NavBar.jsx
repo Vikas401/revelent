@@ -5,18 +5,17 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignOutMenus from '../Menus/SignOutMenus';
 import SignInMenus from '../Menus/SignInMenus';
 import { openModal } from '../../modals/modalActions';
-import { logout } from '../../auth/authActions';
+import { logOut } from '../../auth/authActions';
 
 const actions = {
   openModal,
-  logout
+   logOut
 };
-
-const mapStateToProps = (state) =>({
+const mapStateToProps = (state) => ({
   auth: state.auth
-});
+})
+
  class NavBar extends Component {
-   
    handleSignIn = () => {
      this.props.openModal('LoginModal')
     }
@@ -26,13 +25,16 @@ const mapStateToProps = (state) =>({
    }
 
    handleSignOut = () => {
-     this.props.logout()
-    this.props.history.push('/');
+     localStorage.removeItem('token')
+     this.props.logOut()
+     this.props.history.push('/');
     }
 
     render() {
-      const { auth } = this.props;
-      const authenticated = auth.authenticated;
+         const { auth } = this.props;
+         
+            const authenticated = auth.authenticated;
+          //  const currentUser = auth.currentUser;
         return (
             <Menu inverted fixed="top">
             <Container>
@@ -41,7 +43,7 @@ const mapStateToProps = (state) =>({
                 Re-vents
               </Menu.Item>
               <Menu.Item as={NavLink} exact to='/events' name="Events" />
-              {authenticated && (
+              {authenticated &&
                <Fragment>
                <Menu.Item as={NavLink} to='/people' name="People" />
                <Menu.Item as={NavLink} to='/test' name="Test" />
@@ -50,14 +52,14 @@ const mapStateToProps = (state) =>({
                  <Button as={Link} to='/createEvent' floated="right" positive inverted content="Create Event" />
                </Menu.Item>
                </Fragment>
-              )}
+              }
               
               {authenticated ? (
-                 <SignInMenus signOut={this.handleSignOut} currentUser = {auth.currentUser}/> 
-                 ) : (
+                 <SignInMenus signOut={this.handleSignOut} currentUser={auth.currentUser} /> 
+            ) : (
                   <SignOutMenus signIn={this.handleSignIn} register = {this.handleRegister}/>
-                  )
-                }
+                )
+              }
             </Container>
           </Menu>
         )

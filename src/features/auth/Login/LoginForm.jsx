@@ -1,36 +1,73 @@
 import React from 'react';
-import { Form, Segment, Button } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import TextInput from '../../../app/common/form/TextInput';
-import { login } from '../authActions';
+import { Form, Segment, Button, Divider } from 'semantic-ui-react';
+
 import { connect } from 'react-redux';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { userPostFetch } from '../authActions';
+import { closeModal } from '../../modals/modalActions';
+ 
 
-const actions ={
-  login
-};
+ const actions ={
+  userPostFetch,
+  closeModal
+ };
 
-const LoginForm = ({login, handleSubmit}) => {
-  return (
-    <Form error size="large" onSubmit={handleSubmit(login)} autoComplete='off'>
-      <Segment>
-        <Field
+
+class LoginForm extends React.Component{
+  state={
+    email: '',
+    password: ''
+  }
+ 
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+    this.props.userPostFetch(this.state)
+    this.props.closeModal()
+    
+   
+  
+  }
+  handleChange= (evt) => {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    });
+  }
+  
+  render(){
+       //const { currentUser } = this.props;
+      // console.log({currentUser})
+    return (
+      <Form error size="large" onSubmit={this.handleSubmit} autoComplete='on'>
+        <Segment>
+        <Form.Field>
+        <input
           name="email"
-          component={TextInput}
-          type="text"
-          placeholder="Email Address"
-        />
-        <Field
-          name="password"
-          component={TextInput}
-          type="password"
-          placeholder="password"
-        />
-        <Button fluid size="large" color="teal">
-          Login
-        </Button>
-      </Segment>
-    </Form>
-  );
-};
+          onChange={this.handleChange}
+          value={this.state.email}
+          placeholder="Email"/>
+          </Form.Field>
+          <Form.Field>
+          <input
+            name="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+            placeholder="Password"/>
+            </Form.Field>
+          <Button fluid size="large" color="teal">
+            Login
+          </Button>
+          <Divider horizontal>
+            Or
+          </Divider>
+          <SocialLogin/>
+        </Segment>
+      </Form>
+    );
+  }
+} 
+ 
+const mapStateToProps = state => ({
+  currentUser: state.auth 
+})
 
-export default connect(null, actions)(reduxForm({ form: 'loginForm'})(LoginForm));
+export default connect(mapStateToProps, actions)(LoginForm);

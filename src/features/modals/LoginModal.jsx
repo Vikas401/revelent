@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import LoginForm from '../auth/Login/LoginForm';
 import {closeModal} from "./modalActions";
 
+
 const actions = {closeModal};
 
 class LoginModal extends Component {

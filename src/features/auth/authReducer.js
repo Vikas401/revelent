@@ -1,26 +1,21 @@
-import { createReducer } from "../../app/common/utills/reducerUtils"
-import { LOGIN_USER, SIGN_OUT_USER } from "./authConstant"
+ const initialState = {
+   authenticated: false,
+   currentUser: null
+ }
 
-const initialState = {
-    authenticated: false,
-    currentUser: null
-}
 
-const loginUser = (state, payload) => {
-    return{
-        authenticated: true,
-        currentUser: payload.creds.email
-    };
-};
 
-const signOutUser = () => {
-    return{
-        authenticated: false,
-        currentUser: null
-    };
-};
+  export default (state = initialState, action) => {
+    switch (action.type){
+    
+        case 'SIGN_IN':
+          return {...state,authenticated:true, currentUser: action.payload};
+          case 'SIGN_OUT':
+            return {...state, authenticated: false, currentUser: null}
+          default:
+        
+          return state;
+    }
+  }
 
-export default createReducer(initialState, {
-    [LOGIN_USER]: loginUser,
-    [SIGN_OUT_USER]: signOutUser
-});
+ 

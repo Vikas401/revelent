@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
 
- const EventDetailInfo = ({ event }) => {
+ const EventDetailInfo = ({event}) => {
+      //console.log(event);
     return (
         <Fragment>
         <Segment.Group>

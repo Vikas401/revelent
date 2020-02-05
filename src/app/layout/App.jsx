@@ -11,9 +11,13 @@ import EventForm from '../../features/event/EventForm/EventForm';
 import UserDetailPage from '../../features/user/UserDetailed/UserDetailPage';
 import TestComponent from '../../features/testComponent/TestComponent';
 import ModalManager from '../../features/modals/ModalManager';
+//import { getProfileFetch } from '../../features/auth/authActions';
+
 
  class App extends Component {
+  
   render() {
+     
     return (
       <Fragment>
       <ModalManager/>
@@ -41,4 +45,7 @@ import ModalManager from '../../features/modals/ModalManager';
     )
   }
 }
+
+
+
 export default withRouter(App);
