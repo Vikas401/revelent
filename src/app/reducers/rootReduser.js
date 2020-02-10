@@ -20,6 +20,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     async: asyncReducer,
     toastr: ToastrReducer,
-    userInfo: userPostInsert
+    userInfo: userPostInsert,
+  
 })
 export default rootReducer;

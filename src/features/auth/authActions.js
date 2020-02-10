@@ -1,33 +1,30 @@
+import { toastr } from 'react-redux-toastr';
 import users from '../../authApi/user';
+
+
 export const userPostInsert = user => async dispatch => {
     try{
       const response =  await users.post('/signup', { ...user });
       dispatch({
         type: 'SIGN_UP',
-        payload: response.data,
+        payload: response.data
       })
-      //  console.log(response.data)
       await localStorage.setItem('token', response.data.token);
-     // dispatch(loginUser(response.data.user))
-      
+      toastr.success('Success', 'Your Registration is complete')
     }catch(err){
       console.log(err);
     }
   }
-  const loginUser = userObj => ({
-    type: 'SIGN_IN',
-    payload: userObj
-})
+  
   export const userPostFetch = user => async dispatch => {
     try{
       const response =  await users.post('/signin', { ...user });
       dispatch({
         type: 'SIGN_IN',
-        payload: response.data,
+        payload: response.data
       })
-       
       await localStorage.setItem('token', response.data.token);
-      dispatch(loginUser(response.data.user))
+      toastr.success('Success', 'Your login succesfully')
     }catch(err){
       console.log(err);
     }
@@ -45,21 +42,22 @@ export const userPostInsert = user => async dispatch => {
   }
   } 
 
-  // export const getProfileFetch = user => async dispatch => {
-  //  try{
-  //   const token = localStorage.token
-
-  //    if(token){
-  //     const response =  await users.get('/profile', { ...user });
-  //     dispatch({
-  //       type: 'SIGN_IN',
-  //       payload: response.data,
-  //     })
-  //     dispatch(loginUser(response.data.user))
-  //    }
-  //  }catch(err){
-  //    console.log(err);
-  //  }
+  export const getProfileFetch = user => async dispatch => {
+   try{
+    const token = localStorage.token
+    
+     if(token){
+      const response =  await users.put('/profile', { ...user });
+      console.log(response.data)
+      dispatch({
+        type: 'UPDATE_PROFILE',
+        payload: response.data,
+      })
+     
+     }
+   }catch(err){
+     console.log(err);
+   }
   
-  // }
+  }
  

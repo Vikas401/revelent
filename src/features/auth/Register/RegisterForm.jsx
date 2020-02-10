@@ -10,9 +10,10 @@ import { closeModal } from '../../modals/modalActions';
 class RegisterForm extends React.Component {
     
   state = {
-     
+      userName: '',
       email: '',
       password: '',
+      contact: ''
       
     }
      
@@ -32,11 +33,19 @@ class RegisterForm extends React.Component {
   
  
     render(){
-         // console.log(this.props.users);
+       
       return (
         <Segment>
               <Form size="large" onSubmit= {this.onFormSubmit}>
-            
+             
+              <Form.Field>
+              <input
+                name="userName"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.userName}
+                placeholder="UserName"/>
+                </Form.Field>
               <Form.Field>
                 <input
                   name="email"
@@ -53,6 +62,14 @@ class RegisterForm extends React.Component {
                     value={this.state.password}
                     placeholder="Password"/>
                     </Form.Field>
+                    <Form.Field>
+                    <input
+                      name="contact"
+                      type="number"
+                      onChange={this.handleChange}
+                      value={this.state.contact}
+                      placeholder="Contact"/>
+                      </Form.Field>
                   
               <Button fluid size="large" color="teal">
                 Register
@@ -67,10 +84,12 @@ class RegisterForm extends React.Component {
   };
   }
   const mapStateToProps = (state) => ({
-    users: state.auth
+    users: state.auth,
+   
   })
   const actions = {
     userPostInsert,
+    
     closeModal
   }
 

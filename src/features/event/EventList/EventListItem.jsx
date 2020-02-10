@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
-import EventAttendee from './EventListAttendee';
+// import EventAttendee from './EventListAttendee';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 //import { deleteEvent } from '../eventActions';
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
  
   render() {
     const { event, deleteEvent } = this.props;
-    
+       
     return (  
       <Segment.Group>
       <Segment>
@@ -39,11 +39,7 @@ import { connect } from 'react-redux';
         </span>
       </Segment>
       <Segment secondary>
-        <List horizontal>
-          { event.attendees && event.attendees.map(attendee => (
-            <EventAttendee key={attendee.id} attendee={attendee}/>
-          ))}
-        </List>
+      
       </Segment>
       <Segment clearing>{event.description}
       <Button onClick={() => deleteEvent()} as="a" color="red" floated="right" content="Delete" />

@@ -71,6 +71,7 @@ const category = [
    
   render() {
     const {history, initialValues, invalid, submitting, pristine} = this.props;
+   
     return (
       <Grid>
       <Grid.Column width={10}>

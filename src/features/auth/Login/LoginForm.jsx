@@ -9,7 +9,8 @@ import { closeModal } from '../../modals/modalActions';
 
  const actions ={
   userPostFetch,
-  closeModal
+  closeModal,
+  
  };
 
 
@@ -18,10 +19,12 @@ class LoginForm extends React.Component{
     email: '',
     password: ''
   }
+
  
-  handleSubmit = (evt) => {
+  handleSubmit =  (evt) => {
     evt.preventDefault();
     this.props.userPostFetch(this.state)
+
     this.props.closeModal()
     
    
@@ -34,9 +37,8 @@ class LoginForm extends React.Component{
   }
   
   render(){
-       //const { currentUser } = this.props;
-      // console.log({currentUser})
-    return (
+    
+    return ( 
       <Form error size="large" onSubmit={this.handleSubmit} autoComplete='on'>
         <Segment>
         <Form.Field>
@@ -66,8 +68,12 @@ class LoginForm extends React.Component{
   }
 } 
  
-const mapStateToProps = state => ({
-  currentUser: state.auth 
-})
+const mapStateToProps = (state) => {
+  return{
+    currentUser: state.auth,
+    
+   }
+};
+
 
 export default connect(mapStateToProps, actions)(LoginForm);

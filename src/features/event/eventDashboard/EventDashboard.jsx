@@ -16,7 +16,7 @@ import EventActivity from '../EventActivity/EventActivity';
    
   render() {
        const { events, loading } = this.props;
-       // console.log(events);
+        // console.log(events);
        if (loading) return <LodingComponent/>
       return (
         <Grid>

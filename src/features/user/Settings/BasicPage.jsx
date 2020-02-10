@@ -1,62 +1,62 @@
 import React, {Component} from 'react';
 import {Segment, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
+import { connect } from 'react-redux';
+import { getProfileFetch } from '../../auth/authActions';
 
 import TextInput from "../../../app/common/form/TextInput";
-import RedioInput from '../../../app/common/form/RedioInput';
-import DateInput from '../../../app/common/form/DateInput';
 
 
+const actions = {
+    getProfileFetch
+};
+
+const mapStateToProps = (state) =>({
+    auth: state.auth
+})
 class BasicPage extends Component {
 
+    handleSubmit=(e) => {
+        e.preventDefault();
+        this.props.getProfileFetch()
+    }
     render() {
-        const {pristine, submitting} = this.props;
+        const {pristine, submitting, auth, authenticated } = this.props;
+         
         return (
             <Segment>
                 <Header dividing size='large' content='Basics' />
-                <Form>
+                {authenticated &&
+                <Form onSubmit={this.handleSubmit}>
                     <Field
                         width={8}
-                        name='displayName'
+                        name='userName'
                         type='text'
                         component={TextInput}
-                        placeholder='Known As'
+                        placeholder={auth.currentUser.userName}
                     />
-                    <Form.Group inline>
-                    <label>Gender: </label>
-                    <Field
-                      name='gender'
-                      type='radio'
-                      value='male'
-                      lable='Male'
-                      component={RedioInput}
-                    />
-                    <Field
-                      name='gender'
-                      type='radio'
-                      value='female'
-                      lable='Femail'
-                      component={RedioInput}
-                    />
-                    </Form.Group>
+                   
                     <Field
                         width={8}
-                        name='dateOfBirth'
-                        component={DateInput}
-                        placeholder='Date of Birth'
+                        name='email'
+                        component={TextInput}
+                        placeholder={auth.currentUser.email}
                     />
                     <Field
-                        name='city'
-                        placeholder='Home Town'
+                        name='userId'
+                        placeholder={auth.currentUser.userId}
                         component={TextInput}
                         width={8}
+
                     />
                     <Divider/>
                     <Button disabled={pristine || submitting} size='large' positive content='Update Profile'/>
-                </Form>
-            </Segment>
+                
+                    </Form>
+                }
+                    </Segment>
         );
     }
 }
 
-export default reduxForm({form: 'userProfile'})(BasicPage);
+export default connect(mapStateToProps, actions)(reduxForm({form: 'userProfile', enableReinitialize:  true})(BasicPage));

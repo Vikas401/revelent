@@ -1,7 +1,7 @@
 import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENT } from "./eventconstant";
 //import { asyncActionStart, asyncActionFinish, asyncActionError } from "../async/asyncActions";
 ////import { fetchSampleData } from "../../app/data/mokeApi";
-//import { toastr } from 'react-redux-toastr';
+import { toastr } from 'react-redux-toastr';
 import events from '../../apis/Event';
 //import history from 'history';
 
@@ -20,7 +20,8 @@ export const createEvent = (event) =>
             type: CREATE_EVENT,
             payload: response.data
            })
-          
+           toastr.success('Success', 'Your Post is  created')
+
      }
 
 
@@ -32,7 +33,8 @@ export const updateEvent = (id,event) =>
              type: UPDATE_EVENT,
              payload: response.data
             })
-            
+            toastr.success('Success', 'Your event is updated')
+
         
       
 };
@@ -44,6 +46,8 @@ export const deleteEvent = (eventId) => {
             type: DELETE_EVENT,
          payload: eventId
    })
+   toastr.success('Success', 'Your event is delete')
+
     }
    };
 

@@ -13,7 +13,7 @@ import EventDetailInfo from './EventDetailInfo';
  }
 
  const EventDetailsPage =({ event }) => {
-     
+       
     return (
       <Grid>
       <Grid.Column width={10}>
@@ -22,7 +22,8 @@ import EventDetailInfo from './EventDetailInfo';
       <EventDetailChat/>
       </Grid.Column>
       <Grid.Column width={6}>
-       <EventDetailSidebar attendees={event.attendees}/>
+        
+       <EventDetailSidebar/>
       </Grid.Column>
       </Grid>
    );

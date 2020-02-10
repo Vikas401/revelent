@@ -19,7 +19,7 @@ const AccountPage = ({ error, invalid, submitting }) => {
       <div>
         <Header color="teal" sub content="Change password" />
         <p>Use this form to update your account settings</p>
-        <Form>
+        <Form >
           <Field
             width={8}
             name="newPassword1"
