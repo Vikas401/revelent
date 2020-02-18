@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form, Segment, Button, Divider } from 'semantic-ui-react';
+import { Form, Segment, Button } from 'semantic-ui-react';
 
 import { connect } from 'react-redux';
-import SocialLogin from '../SocialLogin/SocialLogin';
+// import SocialLogin from '../SocialLogin/SocialLogin';
 import { userPostFetch } from '../authActions';
 import { closeModal } from '../../modals/modalActions';
  
@@ -51,6 +51,7 @@ class LoginForm extends React.Component{
           <Form.Field>
           <input
             name="password"
+            type="password"
             onChange={this.handleChange}
             value={this.state.password}
             placeholder="Password"/>
@@ -58,10 +59,7 @@ class LoginForm extends React.Component{
           <Button fluid size="large" color="teal">
             Login
           </Button>
-          <Divider horizontal>
-            Or
-          </Divider>
-          <SocialLogin/>
+          
         </Segment>
       </Form>
     );

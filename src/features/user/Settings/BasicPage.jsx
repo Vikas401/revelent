@@ -2,24 +2,18 @@ import React, {Component} from 'react';
 import {Segment, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import { connect } from 'react-redux';
-import { getProfileFetch } from '../../auth/authActions';
 
 import TextInput from "../../../app/common/form/TextInput";
 
 
-const actions = {
-    getProfileFetch
-};
+
 
 const mapStateToProps = (state) =>({
     auth: state.auth
 })
 class BasicPage extends Component {
 
-    handleSubmit=(e) => {
-        e.preventDefault();
-        this.props.getProfileFetch()
-    }
+    
     render() {
         const {pristine, submitting, auth, authenticated } = this.props;
          
@@ -59,4 +53,4 @@ class BasicPage extends Component {
     }
 }
 
-export default connect(mapStateToProps, actions)(reduxForm({form: 'userProfile', enableReinitialize:  true})(BasicPage));
+export default connect(mapStateToProps)(reduxForm({form: 'userProfile', enableReinitialize:  true})(BasicPage));

@@ -61,6 +61,7 @@ const category = [
          ...event,
          id: cuid(),
           hostPhotoURL: '/assets/vikas.jpg',
+          photoURL: '/assets/vikas.jpg',
         }
       this.props.createEvent(newEvent);
       this.props.history.push(`/events/${newEvent.id}`)

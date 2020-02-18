@@ -5,7 +5,7 @@ import Cropperimage from './Cropperimage';
 
 const PhotosPage =() => {
          const [files, setFiles] = useState([]);
-         const  [image, setImage ] = useState(null);
+         const  [ setImage ] = useState(null);
            
         useEffect(() => {
              

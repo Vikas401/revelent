@@ -1,27 +1,22 @@
 import React, { Component } from 'react'
-import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
-// import EventAttendee from './EventListAttendee';
+import { Segment, Item, Icon, Button } from 'semantic-ui-react';
+//import EventAttendee from './EventListAttendee';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-//import { deleteEvent } from '../eventActions';
-
+// import EventDelete from '../EventDelete/EventDelete';
 
 
  class EventListItem extends Component {
 
-  // componentDidMount(){
-  //   this.props.loadEvent(this.props.match.params.id)
-  // }
- 
- 
+  
   render() {
-    const { event, deleteEvent } = this.props;
+    const { event } = this.props;
+   
        
     return (  
       <Segment.Group>
       <Segment>
         <Item.Group>
-          <Item>
+          <Item>       
             <Item.Image size="tiny" circular src={event.hostPhotoURL} />
             <Item.Content>
               <Item.Header >{event.title}</Item.Header>
@@ -42,17 +37,17 @@ import { connect } from 'react-redux';
       
       </Segment>
       <Segment clearing>{event.description}
-      <Button onClick={() => deleteEvent()} as="a" color="red" floated="right" content="Delete" />
+      
+      <Button  as={Link} to={`/delete/${event.id}`} color="red" floated="right" content="Delete" />
+    
+    
         <Button  as={Link}  to={`/events/${event.id}`} color="teal" floated="right" content="View" />
-      </Segment>
+    
+        </Segment>
     </Segment.Group>
     )
   }
 }
-// const actions= {
-//   deleteEvent
-// }
-// const mapStateToProps = (state) => {
-//  return { events: state.event };
-// }
-export default connect()(EventListItem);
+
+
+export default EventListItem;

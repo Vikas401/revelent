@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { toastr } from 'react-redux-toastr';
 
 
 
@@ -57,7 +56,7 @@ const eventImageTextStyle = {
 
       <Segment attached="bottom">
        
-        <Button color="teal">JOIN THIS EVENT</Button>
+        <Button color="teal" >JOIN THIS EVENT</Button>
         {event &&
         <Button as={Link} to={`/manage/${event.id}`} color="orange" floated="right">
           Manage Event

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Form, Segment, Button, Divider } from 'semantic-ui-react';
+import { Form, Segment, Button } from 'semantic-ui-react';
 //import { reduxForm } from 'redux-form';
 //import TextInput from '../../../app/common/form/TextInput';
-import SocialLogin from '../SocialLogin/SocialLogin';
+// import SocialLogin from '../SocialLogin/SocialLogin';
 import { connect } from 'react-redux';
 import { userPostInsert } from '../authActions';
 import { closeModal } from '../../modals/modalActions';
+import { createauthor } from '../../../author/authorActions';
  
 class RegisterForm extends React.Component {
     
@@ -21,6 +22,7 @@ class RegisterForm extends React.Component {
       evt.preventDefault();
     
       this.props.userPostInsert(this.state);
+      this.props.createauthor(this.state);
       this.props.closeModal();
       
     }
@@ -33,7 +35,7 @@ class RegisterForm extends React.Component {
   
  
     render(){
-       
+          
       return (
         <Segment>
               <Form size="large" onSubmit= {this.onFormSubmit}>
@@ -74,10 +76,7 @@ class RegisterForm extends React.Component {
               <Button fluid size="large" color="teal">
                 Register
               </Button>
-              <Divider horizontal>
-              Or
-            </Divider>
-            <SocialLogin/>
+             
           </Form>
           </Segment>
    );
@@ -85,11 +84,12 @@ class RegisterForm extends React.Component {
   }
   const mapStateToProps = (state) => ({
     users: state.auth,
+    author: state.author
    
   })
   const actions = {
     userPostInsert,
-    
+    createauthor,
     closeModal
   }
 

@@ -1,9 +1,9 @@
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENT } from "./eventconstant";
+import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENT, FETCH_ONE_EVENT } from "./eventconstant";
 //import { asyncActionStart, asyncActionFinish, asyncActionError } from "../async/asyncActions";
 ////import { fetchSampleData } from "../../app/data/mokeApi";
 import { toastr } from 'react-redux-toastr';
 import events from '../../apis/Event';
-//import history from 'history';
+//import history from '../../history';
 
 
 
@@ -39,17 +39,20 @@ export const updateEvent = (id,event) =>
       
 };
 
-export const deleteEvent = (eventId) => {
-    return async dispatch => {
-        await events.delete(`/events/${eventId}`);
-        dispatch({
-            type: DELETE_EVENT,
-         payload: eventId
-   })
-   toastr.success('Success', 'Your event is delete')
+export const deleteEvent = (id) => async dispatch => {
+    await events.delete(`/events/${id}`)
+   dispatch({ type: DELETE_EVENT, payload: id})
+  // history.push('/')
+  toastr.success('Success', 'Your event is delete')
+   }
+   
+  
+   export const fetchOneEvent = (id) => async dispatch => {
+    const response = await events.get(`/events/${id}`);
 
-    }
-   };
+    dispatch({ type:FETCH_ONE_EVENT, payload: response.data });
+};
+  
 
    export const loadEvent = () => 
        async dispatch => {

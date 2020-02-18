@@ -15,7 +15,10 @@
             return {...state, authenticated: false, currentUser: null}
           
           case 'UPDATE_PROFILE':
-          return {...state, authenticated:true, currentUser: action.payload}
+          return {...state, authenticated:true, currentUser:action.payload}
+
+          // case 'GET_PROFILE':
+          //   return {...state, authenticated: true, currentUser:action.payload}
           default:
         
           return state;

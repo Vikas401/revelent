@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
+import { Segment, Grid, Icon } from 'semantic-ui-react';
 
  const EventDetailInfo = ({event}) => {
       //console.log(event);
@@ -38,7 +38,7 @@ import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
               <span>{event.venue}</span>
             </Grid.Column>}
             <Grid.Column width={4}>
-              <Button color="teal" size="tiny" content="Show Map" />
+             
             </Grid.Column>
           </Grid>
         </Segment>

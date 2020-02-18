@@ -7,23 +7,17 @@ import LodingComponent from '../../../app/layout/LodingComponent';
 import EventActivity from '../EventActivity/EventActivity';
 
  class EventDashboard extends Component {
-  
-   
-  handleDeleteEvent = (id) => {
-        this.props.deleteEvent(id);
-    }
-   
    
   render() {
-       const { events, loading } = this.props;
+       const { events, loading, auth } = this.props;
         // console.log(events);
        if (loading) return <LodingComponent/>
       return (
         <Grid>
         <Grid.Column width={10}>
         <EventList  
+        auth={auth}
         events={events}
-        deleteEvent={this.handleDeleteEvent}
         />
         </Grid.Column>
         <Grid.Column width={6}>

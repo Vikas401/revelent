@@ -17,11 +17,7 @@ import _ from 'lodash';
             return { ...state, ..._.mapKeys(action.payload, 'id') }; 
            
          case DELETE_EVENT:
-             return [
-                   
-                ...state.filter(event => event.id !== action.payload.eventId)
-               
-               ];
+             return _.omit(state, action.payload);
                default: 
                return state;
     

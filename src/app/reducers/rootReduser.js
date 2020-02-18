@@ -7,6 +7,7 @@ import modalReducer from "../../features/modals/modalReducer";
 import authReducer from "../../features/auth/authReducer";
 import asyncReducer from "../../features/async/asyncReducer";
 import { userPostInsert } from "../../features/auth/authActions";
+import authorReducer from "../../author/authorReducer";
 
 //import {firebaseReducer, firestoreReducer} from 'react-redux-firebase';
 
@@ -21,6 +22,6 @@ const rootReducer = combineReducers({
     async: asyncReducer,
     toastr: ToastrReducer,
     userInfo: userPostInsert,
-  
+    author: authorReducer
 })
 export default rootReducer;

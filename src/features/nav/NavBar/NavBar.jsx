@@ -6,21 +6,23 @@ import SignOutMenus from '../Menus/SignOutMenus';
 import SignInMenus from '../Menus/SignInMenus';
 import { openModal } from '../../modals/modalActions';
 import { logOut } from '../../auth/authActions';
+//import { loadAuthor } from '../../../author/authorActions';
 
 
 const actions = {
   openModal,
    logOut,
+   
+   
+   
   
 };
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  
-})
+
 
  class NavBar extends Component {
-    
-
+  // componentDidMount(){
+  //   this.props.sessionStart()
+  // }
    handleSignIn = () => {
      this.props.openModal('LoginModal')
      }
@@ -39,12 +41,16 @@ const mapStateToProps = (state) => ({
    
     render() {
         
-         const { auth } = this.props;
+         const { auth, author } = this.props;
+         console.log(author);
+         const authenticated = auth.authenticated;
          
-          
-           const authenticated = auth.authenticated;
+        
+
+
          
-        return (
+         
+         return (
             
             <Menu inverted fixed="top">
             
@@ -54,7 +60,7 @@ const mapStateToProps = (state) => ({
                 Re-vents
               </Menu.Item>
               <Menu.Item as={NavLink} exact to='/events' name="Events" />
-              {authenticated && auth.currentUser  ? (
+              { authenticated  ? (
                <Fragment>
                <Menu.Item as={NavLink} to='/people' name="People" />
                <Menu.Item as={NavLink} to='/test' name="Test" />
@@ -68,9 +74,9 @@ const mapStateToProps = (state) => ({
                )
               }
               
-              {authenticated && auth.currentUser  ? (
+              {  authenticated  ? (
                   
-                 <SignInMenus signOut={this.handleSignOut} user={auth.currentUser} /> 
+                 <SignInMenus signOut={this.handleSignOut} auth={auth.currentUser} /> 
             ) : (
                   <SignOutMenus signIn={this.handleSignIn} register = {this.handleRegister}/>
                 )
@@ -80,4 +86,9 @@ const mapStateToProps = (state) => ({
         )
     }
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+ 
+})
+
 export default withRouter(connect(mapStateToProps, actions)(NavBar));
