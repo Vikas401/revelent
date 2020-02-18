@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 
   
   render() {
-    const { event } = this.props;
-   
+    const { event, auth } = this.props;
+    const authenticated = auth.authenticated;
        
     return (  
       <Segment.Group>
@@ -37,12 +37,12 @@ import { Link } from 'react-router-dom';
       
       </Segment>
       <Segment clearing>{event.description}
-      
+      {authenticated &&
       <Button  as={Link} to={`/delete/${event.id}`} color="red" floated="right" content="Delete" />
-    
-    
+    }
+       { authenticated &&
         <Button  as={Link}  to={`/events/${event.id}`} color="teal" floated="right" content="View" />
-    
+      }
         </Segment>
     </Segment.Group>
     )
